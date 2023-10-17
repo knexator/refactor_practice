@@ -21,7 +21,7 @@ public class Father : MonoBehaviour, IInteractable
     public void Interact()
     {
         UI_DialogPanel.instance.onEndDialog += OnEndDialog;
-        Core.GameStateController.Instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
 
         switch (StaticData.gamePhase)
         {
@@ -46,7 +46,7 @@ public class Father : MonoBehaviour, IInteractable
     private void OnEndDialog()
     {
         UI_DialogPanel.instance.onEndDialog -= OnEndDialog;
-        Core.GameStateController.Instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
+        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
         Player_Interactor.instance.EnableInteracting();
     }
 }

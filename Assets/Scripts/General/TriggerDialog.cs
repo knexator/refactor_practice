@@ -12,13 +12,13 @@ public class TriggerDialog : MonoBehaviour
     {
         UI_DialogPanel.instance.onEndDialog += OnEndDialog;
 
-        Core.GameStateController.Instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
         UI_DialogPanel.instance.ShowDialog(dialogList);
     }
 
     private void OnEndDialog()
     {
         UI_DialogPanel.instance.onEndDialog -= OnEndDialog;
-        Core.GameStateController.Instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
+        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
     }
 }

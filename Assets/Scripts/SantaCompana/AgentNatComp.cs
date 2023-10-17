@@ -45,7 +45,7 @@ namespace SantaCompana
         // Update is called once per frame
         void Update()
         {
-            if (GameStateController.Instance.gameState == GameStateController.GameState.Gameplay)
+            if (GameStateController.instance.gameState == GameStateController.GameState.Gameplay)
             {
                 agent.isStopped = false;
                 AgentFollow(EnemyDestination());

@@ -5,9 +5,9 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class UI_DialogPanel : MonoBehaviour
+public class UI_DialogPanel : Singleton<UI_DialogPanel>
 {
-    public static UI_DialogPanel instance;
+    public static bool dontDestroyOnLoad = true;
     public enum dialogCharacter { KID, FATHER }
     public Action onEndDialog;
 
@@ -30,24 +30,6 @@ public class UI_DialogPanel : MonoBehaviour
     [SerializeField] private bool onDialog;
 
 
-    private void Awake()
-    {
-        CreateSingleton();
-    }
-    private void CreateSingleton()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-    }
-
-
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space) && onDialog == true && typingText == false)
@@ -59,7 +41,7 @@ public class UI_DialogPanel : MonoBehaviour
 
     public void ShowDialog(List<DialogScriptable> newDialogList)
     {
-        Core.GameStateController.Instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
 
         dialogList = newDialogList;
         dialogPanel.SetActive(true);

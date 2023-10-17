@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_ScreamerCanvas : MonoBehaviour
+public class UI_ScreamerCanvas : Singleton<UI_ScreamerCanvas>
 {
-    public static UI_ScreamerCanvas instance;
-
+    public static bool dontDestroyOnLoad = true;
     [Header("[References]")]
     [SerializeField] private AudioSource audiosourceScreamer;
     [SerializeField] private AudioSource audiosourceThunder;
@@ -17,31 +16,13 @@ public class UI_ScreamerCanvas : MonoBehaviour
     [SerializeField] private AudioClip thunderSFX;
 
 
-    private void Awake()
-    {
-        CreateSingleton();
-    }
-    private void CreateSingleton()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-    }
-
-    
     public void ShowScreamer()
     {
         StartCoroutine(Coroutine_ShowScreamer());
 
         IEnumerator Coroutine_ShowScreamer()
         {
-            Core.GameStateController.Instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+            Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
             audiosourceScreamer.PlayOneShot(screamerSFX);
             audiosourceThunder.PlayOneShot(thunderSFX);
             screamerPanel.SetActive(true);
@@ -55,13 +36,13 @@ public class UI_ScreamerCanvas : MonoBehaviour
             UI_FadeCanvas.instance.Play_FadeOut();
 
             yield return new WaitForSeconds(1);
-            Core.GameStateController.Instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
+            Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
         }
     }
 
     public void ShowScreamerImage()
     {
-        Core.GameStateController.Instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
         audiosourceScreamer.PlayOneShot(screamerSFX);
         audiosourceThunder.PlayOneShot(thunderSFX);
         screamerPanel.SetActive(true);

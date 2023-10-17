@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Core;
 
-public class Player_Interactor : MonoBehaviour
+public class Player_Interactor : Singleton<Player_Interactor>
 {
-    public static Player_Interactor instance;
-
+    public static bool dontDestroyOnLoad = false;
     [Header("[References]")]
     [SerializeField] private Player.SimpleMovement playerMovement;
 
@@ -15,29 +14,11 @@ public class Player_Interactor : MonoBehaviour
     [SerializeField] private float rayLenght;
     [SerializeField] private bool interacting;
 
-
-    private void Awake()
-    {
-        CreateSingleton();
-    }
-    private void CreateSingleton()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
-
-
     private void Update()
     {
         if(interacting == false)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && GameStateController.Instance.gameState == GameStateController.GameState.Gameplay)
+            if (Input.GetKeyDown(KeyCode.Space) && GameStateController.instance.gameState == GameStateController.GameState.Gameplay)
             {
                 Interact();
             }

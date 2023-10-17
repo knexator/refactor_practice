@@ -2,29 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_ControlsPanel : MonoBehaviour
+public class UI_ControlsPanel : Singleton<UI_ControlsPanel>
 {
-    public static UI_ControlsPanel instance;
-
+    public static bool dontDestroyOnLoad = false;
     [Header("[References]")]
     [SerializeField] private Animator controlsAnimator;
-
-    private void Awake()
-    {
-        CreateSingleton();
-    }
-    private void CreateSingleton()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
-
 
     public void Show_BasicControls()
     {

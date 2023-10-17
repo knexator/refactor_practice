@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Events_Level4 : MonoBehaviour
+public class Events_Level4 : Singleton<Events_Level4>
 {
-    public static Events_Level4 instance;
+    public static bool dontDestroyOnLoad = false;
 
     [Header("[References]")]
     [SerializeField] private UI_EndingCredits creditsCanvas;
@@ -12,23 +12,7 @@ public class Events_Level4 : MonoBehaviour
 
     [Header("[Configuration]")]
     [SerializeField] private List<DialogScriptable> levelIntroDialog;
-    [SerializeField] private List<DialogScriptable> santaCompañaDialog;
-
-    private void Awake()
-    {
-        CreateSingleton();
-    }
-    private void CreateSingleton()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
+    [SerializeField] private List<DialogScriptable> santaCompanaDialog;
 
     private void Start()
     {
@@ -37,7 +21,7 @@ public class Events_Level4 : MonoBehaviour
 
     private void Play_LevelIntro()
     {
-        Core.GameStateController.Instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
         StartCoroutine(Coroutine_LevelIntro());
 
         IEnumerator Coroutine_LevelIntro()
@@ -52,14 +36,14 @@ public class Events_Level4 : MonoBehaviour
 
     public void Play_Ending()
     {
-        Core.GameStateController.Instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
         creditsCanvas.Play_Ending();
     }
 
     private void OnEndDialog()
     {
         UI_DialogPanel.instance.onEndDialog -= OnEndDialog;
-        Core.GameStateController.Instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
+        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
     }
 
 }

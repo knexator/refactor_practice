@@ -33,7 +33,7 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
-            if (GameStateController.Instance.gameState == GameStateController.GameState.Gameplay)
+            if (GameStateController.instance.gameState == GameStateController.GameState.Gameplay)
             {
                 PlayerInputsValues();
             }
@@ -43,7 +43,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            if (GameStateController.Instance.gameState == GameStateController.GameState.Gameplay)
+            if (GameStateController.instance.gameState == GameStateController.GameState.Gameplay)
             {
                 CanMove();
             }

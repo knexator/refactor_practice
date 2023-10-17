@@ -3,29 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_FadeCanvas : MonoBehaviour
+public class UI_FadeCanvas : Singleton<UI_FadeCanvas>
 {
-    public static UI_FadeCanvas instance;
-
+    public static bool dontDestroyOnLoad = false;
     [Header("[References]")]
     [SerializeField] private Animator fadeAnimator;
-
-
-    private void Awake()
-    {
-        CreateSingleton();
-    }
-    private void CreateSingleton()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
 
     private void Start()
     {

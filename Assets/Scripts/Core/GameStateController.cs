@@ -3,26 +3,10 @@ using UnityEngine;
 
 namespace Core
 {
-    public class GameStateController : MonoBehaviour
+    public class GameStateController : Singleton<GameStateController>
     {
+        public static bool dontDestroyOnLoad = true;
 
-        #region Singleton
-        public static GameStateController Instance;
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(this);
-            }
-            else
-            {
-                Destroy(this);
-            }
-        }
-        #endregion
-        
         public enum GameState
         {
             Gameplay,

@@ -39,7 +39,7 @@ namespace Core
         private void FinishLevel()
         {
             StaticData.gamePhase++;
-            GameStateController.Instance.ChangeGameStateTo(GameStateController.GameState.Pause);
+            GameStateController.instance.ChangeGameStateTo(GameStateController.GameState.Pause);
             StartCoroutine(Coroutine_FinishLevel());
 
             IEnumerator Coroutine_FinishLevel()
@@ -54,7 +54,7 @@ namespace Core
         private void OnEndExitDialog()
         {
             UI_DialogPanel.instance.onEndDialog -= OnEndExitDialog;
-            GameStateController.Instance.ChangeGameStateTo(GameStateController.GameState.Gameplay);
+            GameStateController.instance.ChangeGameStateTo(GameStateController.GameState.Gameplay);
         }
 
     }

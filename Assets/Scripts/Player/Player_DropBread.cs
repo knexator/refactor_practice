@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Core;
 
-public class Player_DropBread : MonoBehaviour
+public class Player_DropBread : Singleton<Player_DropBread>
 {
-    public static Player_DropBread instance;
-
+    public static bool dontDestroyOnLoad = false;
     [Header("[References]")]
     [SerializeField] private GameObject breadPrefab;
 
@@ -19,22 +18,6 @@ public class Player_DropBread : MonoBehaviour
 
     private bool canDropBread;
 
-
-    private void Awake()
-    {
-        CreateSingleton();
-    }
-    private void CreateSingleton()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
 
     private void Start()
     {
@@ -54,7 +37,7 @@ public class Player_DropBread : MonoBehaviour
             }
         }
         
-        if(Input.GetKeyDown(KeyCode.E) && GameStateController.Instance.gameState == GameStateController.GameState.Gameplay)
+        if(Input.GetKeyDown(KeyCode.E) && GameStateController.instance.gameState == GameStateController.GameState.Gameplay)
         {
             if (canDropBread)
             {
