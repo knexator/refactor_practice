@@ -6,7 +6,6 @@ using UnityEngine;
 public abstract class Singleton<T> : MonoBehaviour where T : Component
 {
     public static T instance;
-    public static bool dontDestroyOnLoad;
 
     protected virtual void Awake()
     {
@@ -16,10 +15,23 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
             Destroy(this);
         } else {
             instance = this as T;
+        }
+    }
+}
 
-            if (dontDestroyOnLoad) {
-                DontDestroyOnLoad(this.gameObject);
-            } 
+public abstract class PersistentSingleton<T> : MonoBehaviour where T : Component
+{
+    public static T instance;
+
+    protected virtual void Awake()
+    {
+        if (instance != null && instance != this) {
+            string typename = typeof(T).Name;
+            Debug.LogWarning($"More that one instance of {typename} found.");
+            Destroy(this);
+        } else {
+            instance = this as T;
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 }

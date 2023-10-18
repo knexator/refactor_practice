@@ -6,7 +6,6 @@ using Core;
 
 public class Player_DropBread : Singleton<Player_DropBread>
 {
-    public static bool dontDestroyOnLoad = false;
     [Header("[References]")]
     [SerializeField] private GameObject breadPrefab;
 

@@ -5,9 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class UI_DialogPanel : Singleton<UI_DialogPanel>
+public class UI_DialogPanel : PersistentSingleton<UI_DialogPanel>
 {
-    public static bool dontDestroyOnLoad = true;
     public enum dialogCharacter { KID, FATHER }
     public Action onEndDialog;
 

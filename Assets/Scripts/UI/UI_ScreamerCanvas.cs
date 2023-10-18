@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_ScreamerCanvas : Singleton<UI_ScreamerCanvas>
+public class UI_ScreamerCanvas : PersistentSingleton<UI_ScreamerCanvas>
 {
-    public static bool dontDestroyOnLoad = true;
     [Header("[References]")]
     [SerializeField] private AudioSource audiosourceScreamer;
     [SerializeField] private AudioSource audiosourceThunder;

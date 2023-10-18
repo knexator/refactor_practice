@@ -3,10 +3,8 @@ using UnityEngine;
 
 namespace Core
 {
-    public class GameStateController : Singleton<GameStateController>
+    public class GameStateController : PersistentSingleton<GameStateController>
     {
-        public static bool dontDestroyOnLoad = true;
-
         public enum GameState
         {
             Gameplay,

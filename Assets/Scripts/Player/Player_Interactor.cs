@@ -5,7 +5,6 @@ using Core;
 
 public class Player_Interactor : Singleton<Player_Interactor>
 {
-    public static bool dontDestroyOnLoad = false;
     [Header("[References]")]
     [SerializeField] private Player.SimpleMovement playerMovement;
 

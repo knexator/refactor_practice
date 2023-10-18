@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class UI_FadeCanvas : Singleton<UI_FadeCanvas>
 {
-    public static bool dontDestroyOnLoad = false;
     [Header("[References]")]
     [SerializeField] private Animator fadeAnimator;
 

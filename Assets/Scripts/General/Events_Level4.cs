@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Events_Level4 : Singleton<Events_Level4>
 {
-    public static bool dontDestroyOnLoad = false;
-
     [Header("[References]")]
     [SerializeField] private UI_EndingCredits creditsCanvas;
     [SerializeField] private MazeManager mazeManager;

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UI_ControlsPanel : Singleton<UI_ControlsPanel>
 {
-    public static bool dontDestroyOnLoad = false;
     [Header("[References]")]
     [SerializeField] private Animator controlsAnimator;
 
