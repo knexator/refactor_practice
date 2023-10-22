@@ -14,13 +14,17 @@ public class Player_Interactor : Singleton<Player_Interactor>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && StaticData.gameState == GameState.Gameplay)
-        {
-            Interact();
+        if (StaticData.gameState != GameState.Gameplay) return;
+
+        var maybeInteractable = interactableInFrontOfPlayer();
+
+        // Show the player the object can be interacted with
+        // TODO: this alert system should be part of the interactable interface
+        updateAlertDisplay(maybeInteractable);
+
+        if (maybeInteractable != null && Input.GetKeyDown(KeyCode.Space)) {
+            maybeInteractable.GetComponent<IInteractable>().Interact();
         }
-        
-        ActiveStuffs();
-        
     }
 
     private GameObject alertObj;
@@ -36,20 +40,8 @@ public class Player_Interactor : Singleton<Player_Interactor>
         return null;
     }
 
-    private void Interact()
+    private void updateAlertDisplay(GameObject stuff)
     {
-        var stuff = interactableInFrontOfPlayer();
-        if(stuff != null)
-        {
-            stuff.GetComponent<IInteractable>().Interact();
-        }
-
-    }
-    
-    private void ActiveStuffs()
-    {
-        var stuff = interactableInFrontOfPlayer();
-
         if (stuff != null)
         {
             GameObject newAlertObj = stuff.transform.GetChild(0).gameObject;
