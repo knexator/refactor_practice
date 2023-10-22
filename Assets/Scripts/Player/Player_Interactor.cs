@@ -48,17 +48,12 @@ public class Player_Interactor : Singleton<Player_Interactor>
 
     RaycastHit2D InteractableHit()
     {
-        return Physics2D.Raycast(gameObject.transform.position, FacingDirection(), rayLenght, interactableLayer);
+        return Physics2D.Raycast(gameObject.transform.position, playerMovement.faceDirection, rayLenght, interactableLayer);
     }
 
     void PrintDebugLine()
     {
-        Debug.DrawLine(transform.position, transform.position + (FacingDirection() * rayLenght), Color.red);
-    }
-
-    Vector3 FacingDirection()
-    {
-        return new Vector3(playerMovement.faceDirection.x, playerMovement.faceDirection.y);
+        Debug.DrawLine(transform.position, transform.position + (Vector3)playerMovement.faceDirection * rayLenght, Color.red);
     }
 
     private void UpdateHighlightedInteractable(IInteractable stuff)
