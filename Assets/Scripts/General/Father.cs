@@ -6,6 +6,7 @@ public class Father : MonoBehaviour, IInteractable
 {
     [Header("[References]")]
     [SerializeField] private HouseDoor houseDoor;
+    [field: SerializeField] public GameObject alertPrompt { get; private set; }
 
     [Header("[Configuration]")]
     [SerializeField] private List<DialogScriptable> phase1_Dialog;

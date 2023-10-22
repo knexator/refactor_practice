@@ -16,35 +16,34 @@ public class Player_Interactor : Singleton<Player_Interactor>
     {
         if (StaticData.gameState != GameState.Gameplay) return;
 
-        var maybeInteractable = interactableInFrontOfPlayer();
+        IInteractable maybeInteractable = interactableInFrontOfPlayer();
 
         // Show the player the object can be interacted with
-        // TODO: this alert system should be part of the interactable interface
         updateAlertDisplay(maybeInteractable);
 
         if (maybeInteractable != null && Input.GetKeyDown(KeyCode.Space)) {
-            maybeInteractable.GetComponent<IInteractable>().Interact();
+            maybeInteractable.Interact();
         }
     }
 
     private GameObject alertObj;
 
     // Might return null
-    private GameObject interactableInFrontOfPlayer() {
+    private IInteractable interactableInFrontOfPlayer() {
         var facingDirection = new Vector3(playerMovement.faceDirection.x, playerMovement.faceDirection.y);
         Debug.DrawLine(transform.position, transform.position + (facingDirection * rayLenght), Color.red);
         RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, facingDirection, rayLenght, interactableLayer);
         if (hit.collider != null) {
-            return hit.transform.gameObject;
+            return hit.transform.gameObject.GetComponent<IInteractable>();
         }
         return null;
     }
 
-    private void updateAlertDisplay(GameObject stuff)
+    private void updateAlertDisplay(IInteractable stuff)
     {
         if (stuff != null)
         {
-            GameObject newAlertObj = stuff.transform.GetChild(0).gameObject;
+            GameObject newAlertObj = stuff.alertPrompt;
 
             // Si el objeto aún no está activado, actívalo y actualiza la variable booleana
             if (!newAlertObj.activeSelf)

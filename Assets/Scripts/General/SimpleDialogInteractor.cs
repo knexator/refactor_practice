@@ -9,6 +9,7 @@ public class SimpleDialogInteractor : MonoBehaviour, IInteractable
 
     [SerializeField] private Animator animator;
 
+    [field: SerializeField] public GameObject alertPrompt { get; private set; }
 
     public void Interact()
     {
