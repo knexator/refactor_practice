@@ -15,9 +15,8 @@ public class Player_Interactor : Singleton<Player_Interactor>
 
     private void Update()
     {
-        if (StaticData.gameState != GameState.Gameplay) return;
-
-        HandleInteractableInFrontOfPlayer();
+        if(StaticData.gameState == GameState.Gameplay)
+            HandleInteractableInFrontOfPlayer();
     }
 
     void HandleInteractableInFrontOfPlayer()
