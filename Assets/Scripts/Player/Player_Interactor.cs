@@ -37,13 +37,18 @@ public class Player_Interactor : Singleton<Player_Interactor>
 
     private GameObject lastHighlighted;
 
-    [CanBeNull] private IInteractable interactableInFrontOfPlayer() {
+    [CanBeNull] private IInteractable interactableInFrontOfPlayer()
+    {
         PrintDebugLine();
-        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, FacingDirection(), rayLenght, interactableLayer);
-        if (hit.collider != null) {
-            return hit.transform.gameObject.GetComponent<IInteractable>();
-        }
-        return null;
+        var hit = InteractableHit();
+        return hit.collider != null ?
+            hit.transform.gameObject.GetComponent<IInteractable>()
+            : null;
+    }
+
+    RaycastHit2D InteractableHit()
+    {
+        return Physics2D.Raycast(gameObject.transform.position, FacingDirection(), rayLenght, interactableLayer);
     }
 
     void PrintDebugLine()
