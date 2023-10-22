@@ -18,6 +18,9 @@ public class Player_Interactor : Singleton<Player_Interactor>
         if (StaticData.gameState != GameState.Gameplay) return;
 
         var maybeInteractable = interactableInFrontOfPlayer();
+        if(maybeInteractable is null)
+            return;
+        
         Highlight(maybeInteractable);
 
         if (PlayerAskToInteractWith(maybeInteractable)) {
