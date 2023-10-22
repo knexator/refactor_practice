@@ -61,12 +61,16 @@ public class Player_Interactor : Singleton<Player_Interactor>
             }
         }
         else
+            UnhighlightLastHighlighted();
+    }
+
+    /// Sé que esta palabra no existe pero creo que aporta buena semántica.
+    void UnhighlightLastHighlighted()
+    {
+        // Si el objeto está activado, desactívalo y actualiza la variable booleana
+        if(lastHighlighted != null && lastHighlighted.activeSelf)
         {
-            // Si el objeto está activado, desactívalo y actualiza la variable booleana
-            if (lastHighlighted != null && lastHighlighted.activeSelf)
-            {
-                lastHighlighted.SetActive(false);
-            }
+            lastHighlighted.SetActive(false);
         }
     }
 }
