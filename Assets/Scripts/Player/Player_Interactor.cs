@@ -22,15 +22,12 @@ public class Player_Interactor : Singleton<Player_Interactor>
     void HandleInteractableInFrontOfPlayer()
     {
         var maybeInteractable = interactableInFrontOfPlayer();
+        UpdateHighlightedInteractable(maybeInteractable);
         if(maybeInteractable is null)
             return;
 
-        Highlight(maybeInteractable);
-
         if(PlayerAskToInteractWith(maybeInteractable))
-        {
             maybeInteractable.Interact();
-        }
     }
 
     static bool PlayerAskToInteractWith(IInteractable maybeInteractable)
@@ -50,7 +47,7 @@ public class Player_Interactor : Singleton<Player_Interactor>
         return null;
     }
 
-    private void Highlight(IInteractable stuff)
+    private void UpdateHighlightedInteractable(IInteractable stuff)
     {
         if (stuff != null)
         {
