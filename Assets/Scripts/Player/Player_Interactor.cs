@@ -29,30 +29,35 @@ public class Player_Interactor : Singleton<Player_Interactor>
 
     private GameObject alertObj;
 
+    // Might return null
+    private GameObject interactableInFrontOfPlayer() {
+        Debug.DrawLine(transform.position, transform.position + (facingDirection * rayLenght), Color.red);
+        var facingDirection = new Vector3(playerMovement.faceDirection.x, playerMovement.faceDirection.y);
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, facingDirection, rayLenght, interactableLayer);
+        if (hit.collider != null) {
+            return hit.transform.gameObject;
+        }
+        return null;
+    }
+
     private void Interact()
     {
-        var facingDirection = new Vector3(playerMovement.faceDirection.x, playerMovement.faceDirection.y);
-
-        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, facingDirection, rayLenght, interactableLayer);
-
-        if(hit.collider != null)
+        var stuff = interactableInFrontOfPlayer();
+        if(stuff != null)
         {
             interacting = true;
-            hit.transform.gameObject.GetComponent<IInteractable>().Interact();
+            stuff.GetComponent<IInteractable>().Interact();
         }
 
-        Debug.DrawLine(transform.position, transform.position + (facingDirection * rayLenght), Color.red);
     }
     
     private void ActiveStuffs()
     {
-        var facingDirection = new Vector3(playerMovement.faceDirection.x, playerMovement.faceDirection.y);
+        var stuff = interactableInFrontOfPlayer();
 
-        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, facingDirection, rayLenght, interactableLayer);
-
-        if (hit.collider != null)
+        if (stuff != null)
         {
-            GameObject newAlertObj = hit.transform.GetChild(0).gameObject;
+            GameObject newAlertObj = stuff.transform.GetChild(0).gameObject;
 
             // Si el objeto aún no está activado, actívalo y actualiza la variable booleana
             if (!newAlertObj.activeSelf)
@@ -69,8 +74,6 @@ public class Player_Interactor : Singleton<Player_Interactor>
                 alertObj.SetActive(false);
             }
         }
-        
-        Debug.DrawLine(transform.position, transform.position + (facingDirection * rayLenght), Color.red);
     }
 
     public void EnableInteracting()
