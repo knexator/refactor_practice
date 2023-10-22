@@ -17,13 +17,17 @@ public class Player_Interactor : Singleton<Player_Interactor>
     {
         if (StaticData.gameState != GameState.Gameplay) return;
 
-        IInteractable maybeInteractable = interactableInFrontOfPlayer();
-
+        var maybeInteractable = interactableInFrontOfPlayer();
         Highlight(maybeInteractable);
 
-        if (maybeInteractable != null && Input.GetKeyDown(KeyCode.Space)) {
+        if (PlayerAskToInteractWith(maybeInteractable)) {
             maybeInteractable.Interact();
         }
+    }
+
+    static bool PlayerAskToInteractWith(IInteractable maybeInteractable)
+    {
+        return maybeInteractable != null && Input.GetKeyDown(KeyCode.Space);
     }
 
     private GameObject alertObj;
