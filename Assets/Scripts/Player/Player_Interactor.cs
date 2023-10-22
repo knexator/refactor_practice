@@ -35,7 +35,7 @@ public class Player_Interactor : Singleton<Player_Interactor>
         return maybeInteractable != null && Input.GetKeyDown(KeyCode.Space);
     }
 
-    private GameObject alertObj;
+    private GameObject lastHighlighted;
 
     [CanBeNull] private IInteractable interactableInFrontOfPlayer() {
         var facingDirection = new Vector3(playerMovement.faceDirection.x, playerMovement.faceDirection.y);
@@ -57,15 +57,15 @@ public class Player_Interactor : Singleton<Player_Interactor>
             if (!newAlertObj.activeSelf)
             {
                 newAlertObj.SetActive(true);
-                alertObj = newAlertObj; // Actualiza la referencia
+                lastHighlighted = newAlertObj; // Actualiza la referencia
             }
         }
         else
         {
             // Si el objeto está activado, desactívalo y actualiza la variable booleana
-            if (alertObj != null && alertObj.activeSelf)
+            if (lastHighlighted != null && lastHighlighted.activeSelf)
             {
-                alertObj.SetActive(false);
+                lastHighlighted.SetActive(false);
             }
         }
     }
