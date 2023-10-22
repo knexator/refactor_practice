@@ -149,6 +149,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c4fa999cd7c5ab446b8ba29902087f24, type: 2}
   - {fileID: 11400000, guid: 9117e3f8db62f0f4a81ffdbcba6b99a9, type: 2}
   animator: {fileID: 3880921928571018780}
+  <alertPrompt>k__BackingField: {fileID: 1052762730174413997}
 --- !u!95 &3880921928571018780
 Animator:
   serializedVersion: 5
