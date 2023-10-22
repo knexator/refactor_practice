@@ -51,13 +51,11 @@ public class Player_Interactor : Singleton<Player_Interactor>
     {
         if (stuff != null)
         {
-            GameObject newAlertObj = stuff.alertPrompt;
-
             // Si el objeto aún no está activado, actívalo y actualiza la variable booleana
-            if (!newAlertObj.activeSelf)
+            if (!stuff.alertPrompt.activeSelf)
             {
-                newAlertObj.SetActive(true);
-                lastHighlighted = newAlertObj; // Actualiza la referencia
+                stuff.alertPrompt.SetActive(true);
+                lastHighlighted = stuff.alertPrompt; // Actualiza la referencia
             }
         }
         else
