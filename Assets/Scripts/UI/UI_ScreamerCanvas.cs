@@ -21,7 +21,7 @@ public class UI_ScreamerCanvas : PersistentSingleton<UI_ScreamerCanvas>
 
         IEnumerator Coroutine_ShowScreamer()
         {
-            Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+            StaticData.gameState = GameState.Cutscene;
             audiosourceScreamer.PlayOneShot(screamerSFX);
             audiosourceThunder.PlayOneShot(thunderSFX);
             screamerPanel.SetActive(true);
@@ -35,13 +35,13 @@ public class UI_ScreamerCanvas : PersistentSingleton<UI_ScreamerCanvas>
             UI_FadeCanvas.instance.Play_FadeOut();
 
             yield return new WaitForSeconds(1);
-            Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
+            StaticData.gameState = GameState.Gameplay;
         }
     }
 
     public void ShowScreamerImage()
     {
-        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+        StaticData.gameState = GameState.Cutscene;
         audiosourceScreamer.PlayOneShot(screamerSFX);
         audiosourceThunder.PlayOneShot(thunderSFX);
         screamerPanel.SetActive(true);

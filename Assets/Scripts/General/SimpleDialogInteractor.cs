@@ -15,7 +15,7 @@ public class SimpleDialogInteractor : MonoBehaviour, IInteractable
         animator.Play("Talk");
         UI_DialogPanel.instance.onEndDialog += OnEndDialog;
 
-        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+        StaticData.gameState = GameState.Cutscene;
         UI_DialogPanel.instance.ShowDialog(dialogList);
     }
 
@@ -23,7 +23,7 @@ public class SimpleDialogInteractor : MonoBehaviour, IInteractable
     {
         animator.Play("Idle");
         UI_DialogPanel.instance.onEndDialog -= OnEndDialog;
-        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
+        StaticData.gameState = GameState.Gameplay;
         Player_Interactor.instance.EnableInteracting();
     }
 }

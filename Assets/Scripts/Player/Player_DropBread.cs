@@ -36,7 +36,7 @@ public class Player_DropBread : Singleton<Player_DropBread>
             }
         }
         
-        if(Input.GetKeyDown(KeyCode.E) && GameStateController.instance.gameState == GameStateController.GameState.Gameplay)
+        if(Input.GetKeyDown(KeyCode.E) && StaticData.gameState == GameState.Gameplay)
         {
             if (canDropBread)
             {

@@ -25,7 +25,7 @@ public class HouseDoor : MonoBehaviour
         {
             UI_DialogPanel.instance.onEndDialog += OnEndDialog;
 
-            Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+            StaticData.gameState = GameState.Cutscene;
             UI_DialogPanel.instance.ShowDialog(dialogList);
         }
         else
@@ -37,7 +37,7 @@ public class HouseDoor : MonoBehaviour
     private void OnEndDialog()
     {
         UI_DialogPanel.instance.onEndDialog -= OnEndDialog;
-        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
+        StaticData.gameState = GameState.Gameplay;
         Player_Interactor.instance.EnableInteracting();
     }
 
@@ -45,7 +45,7 @@ public class HouseDoor : MonoBehaviour
     {
         UI_FadeCanvas.instance.Play_FadeIn();
         audiosource.PlayOneShot(doorSFX);
-        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+        StaticData.gameState = GameState.Cutscene;
         yield return new WaitForSeconds(2f);
 
         Player_Interactor.instance.gameObject.transform.position = exteriorPosition.transform.position;
@@ -53,6 +53,6 @@ public class HouseDoor : MonoBehaviour
         UI_FadeCanvas.instance.Play_FadeOut();
         yield return new WaitForSeconds(1f);
 
-        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
+        StaticData.gameState = GameState.Gameplay;
     }
 }

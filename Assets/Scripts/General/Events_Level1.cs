@@ -23,7 +23,7 @@ public class Events_Level1 : MonoBehaviour
 
     private void Play_LevelIntro()
     {
-        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+        StaticData.gameState = GameState.Cutscene;
         StartCoroutine(Coroutine_LevelIntro());
 
         IEnumerator Coroutine_LevelIntro()
@@ -63,14 +63,14 @@ public class Events_Level1 : MonoBehaviour
     private void OnEndIntroDialog()
     {
         UI_DialogPanel.instance.onEndDialog -= OnEndIntroDialog;
-        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
+        StaticData.gameState = GameState.Gameplay;
         Invoke(nameof(Show_AdvancedControls), 2);
     }
 
     private void OnEndDialog()
     {
         UI_DialogPanel.instance.onEndDialog -= OnEndDialog;
-        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
+        StaticData.gameState = GameState.Gameplay;
     }
 
     private void Show_AdvancedControls()

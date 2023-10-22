@@ -15,7 +15,7 @@ public class IntroductionCanvas : MonoBehaviour
 
     private void Start()
     {
-        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+        StaticData.gameState = GameState.Cutscene;
         introductionPanel.SetActive(true);
 
         switch (StaticData.gamePhase)
@@ -43,7 +43,7 @@ public class IntroductionCanvas : MonoBehaviour
 
     public void Disable_IntroductionPanel()
     {
-        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Gameplay);
+        StaticData.gameState = GameState.Gameplay;
         introductionPanel.SetActive(false);
     }
 

@@ -19,7 +19,7 @@ public class TeleportToLevel : MonoBehaviour
 
         IEnumerator Coroutine_TeleportPlayer()
         {
-            Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+            StaticData.gameState = GameState.Cutscene;
             UI_FadeCanvas.instance.Play_FadeIn();
             yield return new WaitForSeconds(2);
 

@@ -17,7 +17,7 @@ public class Player_Interactor : Singleton<Player_Interactor>
     {
         if(interacting == false)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && GameStateController.instance.gameState == GameStateController.GameState.Gameplay)
+            if (Input.GetKeyDown(KeyCode.Space) && StaticData.gameState == GameState.Gameplay)
             {
                 Interact();
             }

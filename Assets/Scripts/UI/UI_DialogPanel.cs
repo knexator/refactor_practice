@@ -40,7 +40,7 @@ public class UI_DialogPanel : PersistentSingleton<UI_DialogPanel>
 
     public void ShowDialog(List<DialogScriptable> newDialogList)
     {
-        Core.GameStateController.instance.ChangeGameStateTo(Core.GameStateController.GameState.Pause);
+        StaticData.gameState = GameState.Cutscene;
 
         dialogList = newDialogList;
         dialogPanel.SetActive(true);
