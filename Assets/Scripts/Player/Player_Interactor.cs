@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Core;
+using JetBrains.Annotations;
 
 public class Player_Interactor : Singleton<Player_Interactor>
 {
@@ -28,8 +29,7 @@ public class Player_Interactor : Singleton<Player_Interactor>
 
     private GameObject alertObj;
 
-    // Might return null
-    private IInteractable interactableInFrontOfPlayer() {
+    [CanBeNull] private IInteractable interactableInFrontOfPlayer() {
         var facingDirection = new Vector3(playerMovement.faceDirection.x, playerMovement.faceDirection.y);
         Debug.DrawLine(transform.position, transform.position + (facingDirection * rayLenght), Color.red);
         RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, facingDirection, rayLenght, interactableLayer);
