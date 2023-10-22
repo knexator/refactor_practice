@@ -47,6 +47,5 @@ public class Father : MonoBehaviour, IInteractable
     {
         UI_DialogPanel.instance.onEndDialog -= OnEndDialog;
         StaticData.gameState = GameState.Gameplay;
-        Player_Interactor.instance.EnableInteracting();
     }
 }

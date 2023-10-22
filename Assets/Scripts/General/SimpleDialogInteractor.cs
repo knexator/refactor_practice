@@ -24,6 +24,5 @@ public class SimpleDialogInteractor : MonoBehaviour, IInteractable
         animator.Play("Idle");
         UI_DialogPanel.instance.onEndDialog -= OnEndDialog;
         StaticData.gameState = GameState.Gameplay;
-        Player_Interactor.instance.EnableInteracting();
     }
 }

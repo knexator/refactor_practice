@@ -11,16 +11,12 @@ public class Player_Interactor : Singleton<Player_Interactor>
     [Header("[Configuration]")]
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private float rayLenght;
-    [SerializeField] private bool interacting;
 
     private void Update()
     {
-        if(interacting == false)
+        if (Input.GetKeyDown(KeyCode.Space) && StaticData.gameState == GameState.Gameplay)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && StaticData.gameState == GameState.Gameplay)
-            {
-                Interact();
-            }
+            Interact();
         }
         
         ActiveStuffs();
@@ -45,7 +41,6 @@ public class Player_Interactor : Singleton<Player_Interactor>
         var stuff = interactableInFrontOfPlayer();
         if(stuff != null)
         {
-            interacting = true;
             stuff.GetComponent<IInteractable>().Interact();
         }
 
@@ -73,17 +68,6 @@ public class Player_Interactor : Singleton<Player_Interactor>
             {
                 alertObj.SetActive(false);
             }
-        }
-    }
-
-    public void EnableInteracting()
-    {
-        StartCoroutine(Coroutine_EnableInteracting());
-
-        IEnumerator Coroutine_EnableInteracting()
-        {
-            yield return new WaitForSeconds(0.25f);
-            interacting = false;
         }
     }
 }

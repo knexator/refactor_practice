@@ -38,7 +38,6 @@ public class HouseDoor : MonoBehaviour
     {
         UI_DialogPanel.instance.onEndDialog -= OnEndDialog;
         StaticData.gameState = GameState.Gameplay;
-        Player_Interactor.instance.EnableInteracting();
     }
 
     IEnumerator Coroutine_TeleportToExterior()
