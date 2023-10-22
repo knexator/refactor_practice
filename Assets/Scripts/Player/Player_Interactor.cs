@@ -27,8 +27,8 @@ public class Player_Interactor : Singleton<Player_Interactor>
 
     // Might return null
     private GameObject interactableInFrontOfPlayer() {
-        Debug.DrawLine(transform.position, transform.position + (facingDirection * rayLenght), Color.red);
         var facingDirection = new Vector3(playerMovement.faceDirection.x, playerMovement.faceDirection.y);
+        Debug.DrawLine(transform.position, transform.position + (facingDirection * rayLenght), Color.red);
         RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, facingDirection, rayLenght, interactableLayer);
         if (hit.collider != null) {
             return hit.transform.gameObject;
