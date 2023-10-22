@@ -50,16 +50,19 @@ public class Player_Interactor : Singleton<Player_Interactor>
     private void UpdateHighlightedInteractable(IInteractable stuff)
     {
         if (stuff != null)
-        {
-            // Si el objeto aún no está activado, actívalo y actualiza la variable booleana
-            if (!stuff.alertPrompt.activeSelf)
-            {
-                stuff.alertPrompt.SetActive(true);
-                lastHighlighted = stuff.alertPrompt; // Actualiza la referencia
-            }
-        }
+            Highlight(stuff);
         else
             UnhighlightLastHighlighted();
+    }
+
+    void Highlight(IInteractable stuff)
+    {
+        // Si el objeto aún no está activado, actívalo y actualiza la variable booleana
+        if(!stuff.alertPrompt.activeSelf)
+        {
+            stuff.alertPrompt.SetActive(true);
+            lastHighlighted = stuff.alertPrompt; // Actualiza la referencia
+        }
     }
 
     /// Sé que esta palabra no existe pero creo que aporta buena semántica.
