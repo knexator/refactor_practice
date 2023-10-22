@@ -38,13 +38,17 @@ public class Player_Interactor : Singleton<Player_Interactor>
     private GameObject lastHighlighted;
 
     [CanBeNull] private IInteractable interactableInFrontOfPlayer() {
-        var facingDirection = new Vector3(playerMovement.faceDirection.x, playerMovement.faceDirection.y);
-        Debug.DrawLine(transform.position, transform.position + (facingDirection * rayLenght), Color.red);
-        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, facingDirection, rayLenght, interactableLayer);
+        Debug.DrawLine(transform.position, transform.position + (FacingDirection() * rayLenght), Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, FacingDirection(), rayLenght, interactableLayer);
         if (hit.collider != null) {
             return hit.transform.gameObject.GetComponent<IInteractable>();
         }
         return null;
+    }
+
+    Vector3 FacingDirection()
+    {
+        return new Vector3(playerMovement.faceDirection.x, playerMovement.faceDirection.y);
     }
 
     private void UpdateHighlightedInteractable(IInteractable stuff)
