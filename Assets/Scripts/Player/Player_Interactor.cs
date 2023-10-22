@@ -19,8 +19,7 @@ public class Player_Interactor : Singleton<Player_Interactor>
 
         IInteractable maybeInteractable = interactableInFrontOfPlayer();
 
-        // Show the player the object can be interacted with
-        updateAlertDisplay(maybeInteractable);
+        Highlight(maybeInteractable);
 
         if (maybeInteractable != null && Input.GetKeyDown(KeyCode.Space)) {
             maybeInteractable.Interact();
@@ -39,7 +38,7 @@ public class Player_Interactor : Singleton<Player_Interactor>
         return null;
     }
 
-    private void updateAlertDisplay(IInteractable stuff)
+    private void Highlight(IInteractable stuff)
     {
         if (stuff != null)
         {
