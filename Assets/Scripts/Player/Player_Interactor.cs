@@ -17,13 +17,19 @@ public class Player_Interactor : Singleton<Player_Interactor>
     {
         if (StaticData.gameState != GameState.Gameplay) return;
 
+        HandleInteractableInFrontOfPlayer();
+    }
+
+    void HandleInteractableInFrontOfPlayer()
+    {
         var maybeInteractable = interactableInFrontOfPlayer();
         if(maybeInteractable is null)
             return;
-        
+
         Highlight(maybeInteractable);
 
-        if (PlayerAskToInteractWith(maybeInteractable)) {
+        if(PlayerAskToInteractWith(maybeInteractable))
+        {
             maybeInteractable.Interact();
         }
     }
